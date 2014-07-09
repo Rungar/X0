@@ -25,11 +25,16 @@ public class Main {
                 who = 'O';
             }
             System.out.println("Make your move " + who);
-            if (mySquare.markField(Integer.parseInt(reader.readLine()),who)) {
-                i++;
-                whoIs = !whoIs;
+            if (who == 'X'){
+                if (mySquare.markField(Integer.parseInt(reader.readLine()),who)) {
+                    i++;
+                    whoIs = !whoIs;
+                } else {
+                    System.out.println("Wrong move");
+                }
             } else {
-                System.out.println("Wrong move");
+                mySquare.aiMove();
+                whoIs = !whoIs;
             }
          }
 
