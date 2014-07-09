@@ -13,6 +13,8 @@ public class Main {
         SquareXO mySquare = new SquareXO();
         mySquare.eraseField();
         mySquare.showField();
+
+
         int i = 0;
         boolean whoIs = true;
         char who = ' ';

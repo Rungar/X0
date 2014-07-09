@@ -9,6 +9,8 @@ public class SquareXO {
 
     private char[][] field = new char[FIELD_SIZE][FIELD_SIZE];
 
+    private static Ai comp = new Ai();
+
 
 
     public void eraseField() {
@@ -17,8 +19,16 @@ public class SquareXO {
                 field[i][j] = DEFAULT_CELL_VALUE;
             }
         }
+        comp.erase();
     }
 
+    public static int getFieldSize() {
+        return FIELD_SIZE;
+    }
+
+    /*public char[][] getField() {
+        return field;
+    }*/
 
     public void showField(){
         for (int i = 0; i < FIELD_SIZE; i++) {
@@ -36,25 +46,31 @@ public class SquareXO {
     public boolean markField(int squareNum, char whoMove) {
         int i;
         int j;
-        switch (squareNum) {
-            case 1 : i = 2; j = 0; break;
-            case 2 : i = 2; j = 1; break;
-            case 3 : i = 2; j = 2; break;
-            case 4 : i = 1; j = 0; break;
-            case 5 : i = 1; j = 1; break;
-            case 6 : i = 1; j = 2; break;
-            case 7 : i = 0; j = 0; break;
-            case 8 : i = 0; j = 1; break;
-            case 9 : i = 0; j = 2; break;
-            default:
-                System.out.println("Wrong input"); return false;
-        }
-        if (field[i][j] == DEFAULT_CELL_VALUE) {
-            field[i][j] = whoMove;
-            showField();
-            return true;
+        if (whoMove <= 'O') {
+            switch (squareNum) {
+                case 1 : i = 2; j = 0; break;
+                case 2 : i = 2; j = 1; break;
+                case 3 : i = 2; j = 2; break;
+                case 4 : i = 1; j = 0; break;
+                case 5 : i = 1; j = 1; break;
+                case 6 : i = 1; j = 2; break;
+                case 7 : i = 0; j = 0; break;
+                case 8 : i = 0; j = 1; break;
+                case 9 : i = 0; j = 2; break;
+                default:
+                    System.out.println("Wrong input"); return false;
+            }
+            if (field[i][j] == DEFAULT_CELL_VALUE) {
+                field[i][j] = whoMove;
+                comp.addCost(i,j);
+                showField();
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            aiMove();
+            return  true;
         }
 
     }
@@ -93,6 +109,12 @@ public class SquareXO {
             return true;
         }
         return false;
+    }
+
+    public void aiMove(){
+        comp.findMAx();
+        field[comp.getMaxI()][comp.getMaxJ()] = 'O';
+        showField();
     }
 
 }
