@@ -28,6 +28,8 @@ public class Main {
         Field mySquare = new Field(sizeOfField);
         mySquare.showField();
 
+        System.out.println("To win on this field you must fill " + mySquare.getToWin()+" cells in line");
+
 
         int moveNumber = 0;
 
@@ -52,6 +54,7 @@ public class Main {
                 mySquare.aiMove();
                 moveNumber++;
             }
+
          }
 
     }

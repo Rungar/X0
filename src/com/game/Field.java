@@ -20,10 +20,10 @@ public class Field {
     public Field(int size) {
         fieldSize = size;
         field = new Value[fieldSize * fieldSize];
-        if (size > 5 && size < 10) {
+        if (size > 4 && size < 8) {
             toWin = 4;
         }
-        if (size > 9) {
+        if (size > 7) {
             toWin = 5;
         }
         arraySize = fieldSize * fieldSize;
@@ -31,6 +31,9 @@ public class Field {
 
     }
 
+    public static int getToWin() {
+        return toWin;
+    }
 
     public static int getFieldSize() {
         return fieldSize;
@@ -65,7 +68,7 @@ public class Field {
     }
 
     public boolean markField(String line) {
-        int squareNum = 1;
+        int squareNum;
         if (line.matches("[0-9]+")) {
             squareNum = Integer.parseInt(line);
 
@@ -73,6 +76,8 @@ public class Field {
                 field[squareNum] = Value.X;
                 comp.addCost(squareNum);
                 showField();
+                System.out.println();
+                //comp.showCost();
                 return true;
             } else {
                 return false;
@@ -82,35 +87,38 @@ public class Field {
         }
     }
 
-
-
-
     public boolean win(char whoMove) {
+        System.out.println();
         for (int i = 0; i < arraySize; i++) {
             int v = 1;
             int g = 1;
             int d1 = 1;
             int d2 = 1;
             if (field[i] != null) {
-                for (int j = 1; j <= toWin; j++) {
+                for (int j = 1; j < toWin; j++) {
                     if(i + j < arraySize) {
                         if (field[i] == field[i+j]) {
                             g++;
                         }
                     }
-                    if (i+j*fieldSize + j < arraySize){
+                    if (i+j*fieldSize < arraySize){
                         if (field[i] == field[i+j * fieldSize]) {
                             v++;
                         }
+                    }
+                    if(i + j*fieldSize +j <arraySize) {
                         if (field[i] == field[i+j*fieldSize + j]) {
                             d1++;
                         }
+                    }
+                    if (i+j*fieldSize -j < arraySize) {
                         if (field[i]==field[i+j*fieldSize-j]) {
                             d2++;
                         }
                     }
                 }
             }
+            //System.out.println("" +g+" "+v+" " +d1+" " +d2);
             if (g == toWin || v == toWin || d1 == toWin || d2 == toWin) {
                 System.out.println(whoMove + " win!");return true;
             }
@@ -119,7 +127,7 @@ public class Field {
     }
 
     public void aiMove(){
-        comp.findMAx();
+        comp.findMax();
         field[comp.getMaxI()] = Value.O;
         showField();
         System.out.println();
