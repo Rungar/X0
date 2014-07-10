@@ -16,7 +16,7 @@ public class Main {
         while (notCorrect) {
             System.out.println("Input field size");
             size = reader.readLine();
-            if (size.matches("[1-9]+") && Integer.parseInt(size) > 2) {
+            if (size.matches("[0-9]+") && Integer.parseInt(size) > 2) {
                 sizeOfField = Integer.parseInt(size);
                 notCorrect = false;
             } else {
@@ -28,7 +28,7 @@ public class Main {
         Field mySquare = new Field(sizeOfField);
         mySquare.showField();
 
-        System.out.println("To win on this field you must fill " + mySquare.getToWin()+" cells in line");
+        System.out.println("To isWin on this field you must fill " + mySquare.getToWin()+" cells in line ");
 
 
         int moveNumber = 0;
@@ -36,7 +36,7 @@ public class Main {
         char whoMove = ' ';
         System.out.println("To make a move input a number of cell, where you want to move");
 
-        while (!mySquare.win(whoMove) && moveNumber < mySquare.getArraySize()) {
+        while (!mySquare.isWin(whoMove) && moveNumber < mySquare.getArraySize()) {
             if (isMoveX(moveNumber)) {
                 whoMove = 'X';
             } else {

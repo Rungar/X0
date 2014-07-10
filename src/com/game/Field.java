@@ -3,13 +3,13 @@ package com.game;
 
 public class Field {
 
-    private static int toWin = 3;
+    private final int toWin;
 
     private Ai comp;
 
-    private static int fieldSize;
+    private int fieldSize;
 
-    private static int arraySize;
+    private int arraySize;
 
     enum Value {
         X,
@@ -19,27 +19,28 @@ public class Field {
 
     public Field(int size) {
         fieldSize = size;
-        field = new Value[fieldSize * fieldSize];
-        if (size > 4 && size < 8) {
+        arraySize = fieldSize * fieldSize;
+        field = new Value[arraySize];
+        if (size < 5) {
+            toWin = 3;
+        } else if (size < 8) {
             toWin = 4;
-        }
-        if (size > 7) {
+        } else {
             toWin = 5;
         }
-        arraySize = fieldSize * fieldSize;
-        comp = new Ai();
+        comp = new Ai(this);
 
     }
 
-    public static int getToWin() {
+    public int getToWin() {
         return toWin;
     }
 
-    public static int getFieldSize() {
+    public int getFieldSize() {
         return fieldSize;
     }
 
-    public static int getArraySize() {
+    public int getArraySize() {
         return fieldSize * fieldSize;
     }
 
@@ -53,18 +54,14 @@ public class Field {
         System.out.println();
     }
 
-    public void showCell(int k){
+    public void showCell(int k) {
         String s;
         if (field[k] == null) {
-            s = String.valueOf(k);
+            s = (k <= 9 ? " " : "") + String.valueOf(k);
         } else {
-            s = field[k] == Value.X ? "X" : "#";
+            s = field[k] == Value.X ? " X" : " #";
         }
-            if (k <= 9 || field[k] != null) {
-                System.out.print("[ " + s + "]");
-            } else {
-                System.out.print("[" + s + "]");
-            }
+        System.out.print("[ " + s + "]");
     }
 
     public boolean markField(String line) {
@@ -73,10 +70,8 @@ public class Field {
             squareNum = Integer.parseInt(line);
 
             if (field[squareNum] == null) {
-                field[squareNum] = Value.X;
                 comp.addCost(squareNum);
-                showField();
-                System.out.println();
+                makeMove(squareNum, Value.X);
                 //comp.showCost();
                 return true;
             } else {
@@ -87,40 +82,32 @@ public class Field {
         }
     }
 
-    public boolean win(char whoMove) {
-        System.out.println();
-        for (int i = 0; i < arraySize; i++) {
-            int v = 1;
-            int g = 1;
-            int d1 = 1;
-            int d2 = 1;
-            if (field[i] != null) {
-                for (int j = 1; j < toWin; j++) {
-                    if(i + j < arraySize) {
-                        if (field[i] == field[i+j]) {
-                            g++;
-                        }
-                    }
-                    if (i+j*fieldSize < arraySize){
-                        if (field[i] == field[i+j * fieldSize]) {
-                            v++;
-                        }
-                    }
-                    if(i + j*fieldSize +j <arraySize) {
-                        if (field[i] == field[i+j*fieldSize + j]) {
-                            d1++;
-                        }
-                    }
-                    if (i+j*fieldSize -j < arraySize) {
-                        if (field[i]==field[i+j*fieldSize-j]) {
-                            d2++;
-                        }
-                    }
+    public boolean findLine(int i, int dif) {
+        int lastPosition = i + dif * (toWin - 1);
+        if (lastPosition >= 0 && lastPosition < arraySize) {
+            for (int j = 1; j < toWin; j++) {
+                int position = i + dif * j;
+                if (field[position] != field[i]) {
+                    return false;
                 }
             }
-            //System.out.println("" +g+" "+v+" " +d1+" " +d2);
-            if (g == toWin || v == toWin || d1 == toWin || d2 == toWin) {
-                System.out.println(whoMove + " win!");return true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isWin(char whoMove) {
+        System.out.println();
+        for (int i = 0; i < arraySize; i++) {
+            if (field[i] != null) {
+                if (findLine(i, 1) ||
+                        findLine(i, fieldSize) ||
+                        findLine(i, fieldSize + 1) ||
+                        findLine(i, 1 - fieldSize)) {
+                    System.out.println(whoMove + " win!");
+                    return true;
+                }
             }
         }
         return false;
@@ -128,10 +115,13 @@ public class Field {
 
     public void aiMove(){
         comp.findMax();
-        field[comp.getMaxI()] = Value.O;
-        showField();
-        System.out.println();
-        //comp.showCost();
+        makeMove(comp.getMaxI(), Value.O);
+
     }
 
+    private void makeMove(int i, Value k) {
+        field[i] = k;
+        showField();
+        System.out.println();
+    }
 }
