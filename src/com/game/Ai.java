@@ -113,12 +113,12 @@ public class Ai {
                             squareCost[i-fieldSize] = WHERE_TO_MOVE_COST;
                         }
                     }
-                    if (i - fieldSize >= 0) {
+                    if (i - fieldSize >= 0 && i + fieldSize < arraySize) {
                         if (squareCost[i-fieldSize] == Ai.DEFAULT_SQUAREX_COST && squareCost[i+fieldSize] <= DEFAULT_SQUAREO_COST) {
                             squareCost[i+fieldSize] = WHERE_TO_MOVE_COST;
                         }
                     }
-                    if(i+1<arraySize) {
+                    if(i+1<arraySize && i-1 >= 0) {
                         if (squareCost[i+1] == Ai.DEFAULT_SQUAREX_COST && squareCost[i-1] <= DEFAULT_SQUAREO_COST && i % fieldSize!=0) {
                             squareCost[i-1] = WHERE_TO_MOVE_COST;
                         }
