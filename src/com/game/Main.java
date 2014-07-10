@@ -3,40 +3,60 @@ package com.game;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-//import com.game.SquareXO;
+//import com.game.Field;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        //String name = reader.readLine();
-        //System.out.println(name);
-        SquareXO mySquare = new SquareXO();
-        mySquare.eraseField();
+        String size;
+
+        boolean notCorrect = true;
+        int sizeOfField = 3;
+
+        while (notCorrect) {
+            System.out.println("Input field size");
+            size = reader.readLine();
+            if (size.matches("[1-9]+") && Integer.parseInt(size) > 2) {
+                sizeOfField = Integer.parseInt(size);
+                notCorrect = false;
+            } else {
+                System.out.println("Wrong size input");
+                notCorrect = true;
+            }
+        }
+
+        Field mySquare = new Field(sizeOfField);
         mySquare.showField();
 
 
-        int i = 0;
-        boolean whoIs = true;
-        char who = ' ';
-        while (!mySquare.win(who) && i < 9) {
-            if (whoIs) {
-                who = 'X';
+        int moveNumber = 0;
+
+        char whoMove = ' ';
+        System.out.println("To make a move input a number of cell, where you want to move");
+
+        while (!mySquare.win(whoMove) && moveNumber < mySquare.getArraySize()) {
+            if (isMoveX(moveNumber)) {
+                whoMove = 'X';
             } else {
-                who = 'O';
+                whoMove = 'O';
             }
-            System.out.println("Make your move " + who);
-            if (who == 'X'){
-                if (mySquare.markField(Integer.parseInt(reader.readLine()),who)) {
-                    i++;
-                    whoIs = !whoIs;
-                } else {
+            System.out.println("Make your move " + whoMove);
+            if (whoMove == 'X'){
+                String inputLine = reader.readLine();
+                if (mySquare.markField(inputLine)) {
+                    moveNumber++;
+            } else {
                     System.out.println("Wrong move");
                 }
             } else {
                 mySquare.aiMove();
-                whoIs = !whoIs;
+                moveNumber++;
             }
          }
 
+    }
+
+    private static boolean isMoveX(int i) {
+        return i % 2 == 0;
     }
 }
