@@ -4,12 +4,12 @@ public class Ai {
 
     public static final int DEFAULT_SQUAREX_COST = 10;
     public static final int DEFAULT_SQUAREO_COST = -20;
-    public static final int WHERE_TO_MOVE_COST = 20;
+    //public static final int WHERE_TO_MOVE_COST = 20;
 
 
     private int fieldSize;
     private int[] squareCost;
-    private int maxI = 0;
+    private int maxI;
     private int arraySize;
 
 
@@ -79,9 +79,7 @@ public class Ai {
 
    public void showCost(){
         for (int i = 0; i < (arraySize); i++) {
-            //for (int j = 0; j < (Field.getFieldSize() + 2); j++) {
-                System.out.print(squareCost[i] + " ");
-
+            System.out.print(squareCost[i] + " ");
             if ((i+1)%fieldSize==0) {
                 System.out.println();
             }
@@ -104,55 +102,55 @@ public class Ai {
     public void findMove()  {
         for (int i = 0; i < arraySize; i++) {
                 if (squareCost[i] == DEFAULT_SQUAREX_COST) {
-                    if (findMoveI(i,1) > 1 && squareCost[i+findMoveI(i, 1)] > DEFAULT_SQUAREO_COST) {
+                    if (findMoveI(i,1) > 1 && squareCost[i+findMoveI(i, 1)] > DEFAULT_SQUAREO_COST&& squareCost[i+findMoveI(i, 1)] < findMoveI(i, 1)) {
                         squareCost[i+findMoveI(i, 1)] = findMoveI(i,1) * 10;
                     }
                     if (findMoveI(i,(-1)) > 1) {
-                        if (squareCost[i-findMoveI(i,(-1))] > DEFAULT_SQUAREO_COST) {
+                        if (squareCost[i-findMoveI(i,(-1))] > DEFAULT_SQUAREO_COST && squareCost[i-findMoveI(i,(-1))] < findMoveI(i, (-1))) {
                             squareCost[i-findMoveI(i,(-1))] = findMoveI(i,(-1)) * 10;
                         }
                     }
                     if (findMoveI(i,fieldSize) > 1) {
-                            if(squareCost[i+fieldSize * findMoveI(i,fieldSize)] > DEFAULT_SQUAREO_COST) {
+                            if(squareCost[i+fieldSize * findMoveI(i,fieldSize)] > DEFAULT_SQUAREO_COST && squareCost[i+fieldSize * findMoveI(i,fieldSize)] < findMoveI(i,fieldSize)) {
                                 squareCost[i+fieldSize * findMoveI(i,fieldSize)] = findMoveI(i,fieldSize) * 101;
                             }
                     }
                     if (findMoveI(i,1+fieldSize) > 1) {
-                        if (squareCost[i+(1+fieldSize) * findMoveI(i,1+fieldSize)] > DEFAULT_SQUAREO_COST) {
+                        if (squareCost[i+(1+fieldSize) * findMoveI(i,1+fieldSize)] > DEFAULT_SQUAREO_COST && squareCost[i+(1+fieldSize) * findMoveI(i,1+fieldSize)] < findMoveI(i,1+fieldSize)) {
                             squareCost[i+(1+fieldSize) * findMoveI(i,1+fieldSize)] = findMoveI(i,1 + fieldSize) * 10;
                         }
                     }
                     if (findMoveI(i,1-fieldSize) > 1) {
-                        if(squareCost[i+(1-fieldSize) * findMoveI(i,1-fieldSize)] > DEFAULT_SQUAREO_COST) {
+                        if(squareCost[i+(1-fieldSize) * findMoveI(i,1-fieldSize)] > DEFAULT_SQUAREO_COST && squareCost[i+(1-fieldSize) * findMoveI(i,1-fieldSize)] < findMoveI(i,1-fieldSize)) {
                             squareCost[i+(1-fieldSize) * findMoveI(i,1-fieldSize)] = findMoveI(i,1 - fieldSize) * 10;
                         }
                     }
                     if (findMoveI(i,(-fieldSize)) > 1) {
-                        if (squareCost[i-(fieldSize) * findMoveI(i,(-fieldSize))] > DEFAULT_SQUAREO_COST) {
+                        if (squareCost[i-(fieldSize) * findMoveI(i,(-fieldSize))] > DEFAULT_SQUAREO_COST && squareCost[i-(fieldSize) * findMoveI(i,(-fieldSize))] < findMoveI(i,(-fieldSize))) {
                             squareCost[i-(fieldSize) * findMoveI(i,(-fieldSize))] = findMoveI(i,(-fieldSize)) * 10;
                         }
                     }
                     if (findMoveI(i,(-(1+fieldSize))) > 1) {
-                        if(squareCost[i+((-(1+fieldSize))) * findMoveI(i,(-(1+fieldSize)))] > DEFAULT_SQUAREO_COST) {
+                        if(squareCost[i+((-(1+fieldSize))) * findMoveI(i,(-(1+fieldSize)))] > DEFAULT_SQUAREO_COST && squareCost[i+((-(1+fieldSize))) * findMoveI(i,(-(1+fieldSize)))] < findMoveI(i,(-(1+fieldSize)))) {
                             squareCost[i+((-(1+fieldSize))) * findMoveI(i,(-(1+fieldSize)))] = findMoveI(i,(-(1+fieldSize))) * 10;
                         }
                     }
                     if (findMoveI(i,fieldSize - 1) > 1) {
-                        if(squareCost[i+(fieldSize - 1) * findMoveI(i,fieldSize - 1)] > DEFAULT_SQUAREO_COST) {
+                        if(squareCost[i+(fieldSize - 1) * findMoveI(i,fieldSize - 1)] > DEFAULT_SQUAREO_COST && squareCost[i+(fieldSize - 1) * findMoveI(i,fieldSize - 1)] < findMoveI(i,fieldSize - 1)) {
                             squareCost[i+(fieldSize - 1) * findMoveI(i,fieldSize - 1)] = findMoveI(i,fieldSize - 1) * 10;
                         }
                     }
                 }
-
-
         }
     }
 
     private int findMoveI(int i, int diff) {
         int j = 1;
         while (nextI(i, diff, j)>= 0 && i + diff * j < arraySize) {
-            boolean isEdge = (nextI(i, diff, j - 1)) % fieldSize == 0 || (nextI(i, diff, j - 1)) % fieldSize == (fieldSize - 1);
-            if (isEdge && nextI(i, diff, j) % fieldSize != (fieldSize - 1)/*(nextI(i,diff, j - 1) % fieldSize != nextI(i,diff, j) % fieldSize)*/) {
+
+            boolean isEdge1 = nextI(i, diff, j - 1) % fieldSize  == 0 && nextI(i, diff, j) % fieldSize == (fieldSize - 1);
+            boolean isEdge2 = nextI(i, diff, j - 1) % fieldSize  == (fieldSize - 1) && nextI(i, diff, j) % fieldSize == 0;
+            if (isEdge1 || isEdge2) {
                 return 1;
             }
             if (squareCost[i] == squareCost [i + diff * j]) {
@@ -164,6 +162,7 @@ public class Ai {
         return 1;
 
     }
+
 
     private int nextI(int i, int diff, int j) {
         return i + diff * j;
