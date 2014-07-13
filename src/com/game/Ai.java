@@ -96,7 +96,7 @@ public class Ai {
             }
         }
         squareCost[maxI] = DEFAULT_SQUAREO_COST;
-        showCost();
+        //showCost();
     }
 
     public void findMove()  {

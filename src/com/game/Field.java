@@ -74,7 +74,7 @@ public class Field {
             if (field[squareNum] == null) {
                 comp.addCost(squareNum);
                 makeMove(squareNum, Value.X);
-                comp.showCost();
+                //comp.showCost();
                 return true;
             } else {
                 return false;
@@ -88,8 +88,10 @@ public class Field {
         int lastPosition = i + dif * (toWin - 1);
         if (lastPosition >= 0 && lastPosition < arraySize) {
             for (int j = 1; j < toWin; j++) {
+                boolean isEdge1 = (i + dif * (j - 1) % fieldSize  == 0 && (i + dif * j) % fieldSize == (fieldSize - 1));
+                boolean isEdge2 = (i + dif * (j - 1) % fieldSize  == (fieldSize - 1) && (i + dif * j) % fieldSize == 0);
                 int position = i + dif * j;
-                if (field[position] != field[i]) {
+                if (field[position] != field[i] || isEdge1 || isEdge2) {
                     return false;
                 }
             }
