@@ -3,7 +3,7 @@ package com.game;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-//import com.game.Field;
+
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -28,7 +28,7 @@ public class Main {
         Field mySquare = new Field(sizeOfField);
         mySquare.showField();
 
-        System.out.println("To isWin on this field you must fill " + mySquare.getToWin()+" cells in line ");
+        System.out.println("To win on this field you must fill " + mySquare.getToWin()+" cells in line ");
 
 
         int moveNumber = 0;

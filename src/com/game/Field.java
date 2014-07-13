@@ -68,11 +68,13 @@ public class Field {
         int squareNum;
         if (line.matches("[0-9]+")) {
             squareNum = Integer.parseInt(line);
-
+            if (squareNum >= arraySize) {
+                return false;
+            }
             if (field[squareNum] == null) {
                 comp.addCost(squareNum);
                 makeMove(squareNum, Value.X);
-                //comp.showCost();
+                comp.showCost();
                 return true;
             } else {
                 return false;
