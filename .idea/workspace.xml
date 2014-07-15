@@ -67,7 +67,7 @@
       <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/game/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="2" selection-start="2073" selection-end="2073" vertical-scroll-proportion="0.56416464" vertical-offset="712" max-vertical-offset="1125">
+            <state line="75" column="59" selection-start="2649" selection-end="2649" vertical-scroll-proportion="0.6226415" vertical-offset="699" max-vertical-offset="1410">
               <folding />
             </state>
           </provider>
@@ -76,7 +76,7 @@
       <file leaf-file-name="Field.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/game/Field.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="128" column="40" selection-start="3327" selection-end="3327" vertical-scroll-proportion="0.0" vertical-offset="913" max-vertical-offset="2070">
+            <state line="136" column="28" selection-start="3343" selection-end="3343" vertical-scroll-proportion="0.0" vertical-offset="1479" max-vertical-offset="2160">
               <folding />
             </state>
           </provider>
@@ -94,9 +94,9 @@
       <file leaf-file-name="History.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/game/History.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="22" selection-start="502" selection-end="502" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+            <state line="34" column="5" selection-start="660" selection-end="660" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
               <folding>
-                <element signature="e#233#242#0" expanded="true" />
+                <element signature="e#234#243#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,8 +118,8 @@
         <option value="$PROJECT_DIR$/src/com/game/Square.java" />
         <option value="$PROJECT_DIR$/src/com/game/SquareXO.java" />
         <option value="$PROJECT_DIR$/src/com/game/Ai.java" />
-        <option value="$PROJECT_DIR$/src/com/game/History.java" />
         <option value="$PROJECT_DIR$/src/com/game/Field.java" />
+        <option value="$PROJECT_DIR$/src/com/game/History.java" />
         <option value="$PROJECT_DIR$/src/com/game/Main.java" />
       </list>
     </option>
@@ -361,7 +361,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32988167" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -571,25 +571,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/game/History.java">
+    <entry file="file://$PROJECT_DIR$/src/com/game/Field.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="22" selection-start="502" selection-end="502" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
-          <folding>
-            <element signature="e#233#242#0" expanded="true" />
-          </folding>
+        <state line="136" column="28" selection-start="3343" selection-end="3343" vertical-scroll-proportion="0.0" vertical-offset="1479" max-vertical-offset="2160">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/game/Field.java">
+    <entry file="file://$PROJECT_DIR$/src/com/game/History.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="40" selection-start="3327" selection-end="3327" vertical-scroll-proportion="0.0" vertical-offset="1543" max-vertical-offset="2070">
-          <folding />
+        <state line="34" column="5" selection-start="660" selection-end="660" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
+          <folding>
+            <element signature="e#234#243#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/game/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="2" selection-start="2073" selection-end="2073" vertical-scroll-proportion="0.56416464" vertical-offset="712" max-vertical-offset="1125">
+        <state line="75" column="59" selection-start="2649" selection-end="2649" vertical-scroll-proportion="0.6226415" vertical-offset="699" max-vertical-offset="1410">
           <folding />
         </state>
       </provider>

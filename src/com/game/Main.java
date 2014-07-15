@@ -47,12 +47,13 @@ public class Main {
             if (whoMove == 'X'){
                 String inputLine = reader.readLine();
                 if (inputLine.equals("z")) {
-                    backToMove();
-                }
-                if (mySquare.markField(inputLine)) {
-                    moveNumber++;
-            } else {
-                    System.out.println("Wrong move");
+                    moveNumber = backToMove(mySquare);
+                } else {
+                    if (mySquare.markField(inputLine)) {
+                        moveNumber++;
+                    } else {
+                        System.out.println("Wrong move");
+                    }
                 }
             } else {
                 mySquare.aiMove();
@@ -63,7 +64,25 @@ public class Main {
 
     }
 
-  
+    public static int backToMove(Field square) throws IOException{
+        boolean isRight = true;
+        BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+        while (isRight) {
+            String inputLine = inputReader.readLine();
+            if (inputLine.matches("[0-9]+")){
+                isRight = false;
+                int move = Integer.parseInt(inputLine);
+                square.backToMove(move-1);
+                System.out.println("Current field position");
+                square.showField();
+                return move-1;
+            } else {
+                isRight = true;
+                System.out.println("Wrong move number");
+            }
+        }
+        return 0;
+    }
 
     private static boolean isMoveX(int i) {
         return i % 2 == 0;

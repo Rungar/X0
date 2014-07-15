@@ -93,11 +93,8 @@ public class Field {
         int lastPosition = i + dif * (toWin - 1);
         if (lastPosition >= 0 && lastPosition < arraySize) {
             for (int j = 1; j < toWin; j++) {
-                boolean isEdge1 = (i + dif * (j - 1) % fieldSize  == 0 && (i + dif * j) % fieldSize == (fieldSize - 1));
-                boolean isEdge2 = (i + dif * (j - 1) % fieldSize  == (fieldSize - 1) && (i + dif * j) % fieldSize == 0);
-                boolean isEdge = isEdge1 || isEdge2;
                 int position = i + dif * j;
-                if (field[position] != field[i] || isEdge) {
+                if (field[position] != field[i]) {
                     return false;
                 }
             }
@@ -110,11 +107,10 @@ public class Field {
     public boolean isWin(char whoMove) {
         System.out.println();
         for (int i = 0; i < arraySize; i++) {
+            int column = i % fieldSize;
             if (field[i] != null) {
-                if (findLine(i, 1) ||
-                        findLine(i, fieldSize) ||
-                        findLine(i, fieldSize + 1) ||
-                        findLine(i, 1 - fieldSize)) {
+                if (((fieldSize - column >= toWin) && (findLine(i, 1) || findLine(i, fieldSize + 1) || findLine(i, 1 - fieldSize)))
+                        || findLine(i, fieldSize)) {
                     System.out.println(whoMove + " win!");
                     return true;
                 }
@@ -133,5 +129,15 @@ public class Field {
         field[i] = k;
         showField();
         System.out.println();
+    }
+
+    public void backToMove (int moveNumber) {
+        history.backToMove(moveNumber);
+        for (int i = 0; i < arraySize; i++) {
+            field[i] = null;
+        }
+        for (int i = 0; i < history.getArraySize(); i++) {
+            field[history.getMove(i)] = i % 2 == 0 ? Value.X : Value.O;
+        }
     }
 }
