@@ -7,13 +7,15 @@ public class Field {
 
     private Ai comp;
 
+    private History history;
+
     private int fieldSize;
 
     private int arraySize;
 
     enum Value {
         X,
-        O
+        O,
     }
     private Value[] field;
 
@@ -29,6 +31,8 @@ public class Field {
             toWin = 5;
         }
         comp = new Ai(this);
+
+        history = new History(this);
 
     }
 
@@ -75,6 +79,7 @@ public class Field {
                 comp.addCost(squareNum);
                 makeMove(squareNum, Value.X);
                 //comp.showCost();
+                history.addMove(squareNum);
                 return true;
             } else {
                 return false;
@@ -90,8 +95,9 @@ public class Field {
             for (int j = 1; j < toWin; j++) {
                 boolean isEdge1 = (i + dif * (j - 1) % fieldSize  == 0 && (i + dif * j) % fieldSize == (fieldSize - 1));
                 boolean isEdge2 = (i + dif * (j - 1) % fieldSize  == (fieldSize - 1) && (i + dif * j) % fieldSize == 0);
+                boolean isEdge = isEdge1 || isEdge2;
                 int position = i + dif * j;
-                if (field[position] != field[i] || isEdge1 || isEdge2) {
+                if (field[position] != field[i] || isEdge) {
                     return false;
                 }
             }
@@ -120,7 +126,7 @@ public class Field {
     public void aiMove(){
         comp.findMax();
         makeMove(comp.getMaxI(), Value.O);
-
+        history.addMove(comp.getMaxI());
     }
 
     private void makeMove(int i, Value k) {
